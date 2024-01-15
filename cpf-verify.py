@@ -2,6 +2,7 @@
                         # This code validates an 11 digits CPF number #
 
 user_cpf = "" # User input 11 digits CPF
+user_cpf_first_digit = "" # Used to prevent a repeated string of CPF
 user_cpf_9_digits = "" # First 9 digits used in the firt part of the verifying process
 user_cpf_10_digits = "" # First 10 digits used in the second part of the verifying process
 first_last_digit = "" # First digit after "-"
@@ -18,8 +19,13 @@ user_cpf_formatted = 0 # Final number of the CPF formatted with dots and dash
 ########################################################################################
 
 user_cpf = input("Please input your CPF number: ").replace(".", "").replace("-", "")
+user_cpf_first_digit = user_cpf[0]
 
-if user_cpf.isdigit() and len(user_cpf) == 11:
+# Just to prevent a CPF number like 000.000.000-00
+if user_cpf_first_digit * len(user_cpf) == user_cpf:
+    print("Your CPF is invalid.")
+
+elif user_cpf.isdigit() and len(user_cpf) == 11:
 
     # Taking the CPF into pieces to use later
     first_last_digit = user_cpf[-2]
